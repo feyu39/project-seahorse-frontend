@@ -4,7 +4,9 @@
         <HelloWorld msg="Welcome to Your Vue.js App"/>
     </div>
 </template>
-  
+    
+<style scoped>
+</style>
 <script setup>
 
 </script>
