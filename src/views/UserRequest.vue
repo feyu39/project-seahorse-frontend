@@ -2,11 +2,11 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
   </div>
-  
-  <form>
+
+  <form @submit.prevent="submitRequest">
     <!-- Delivery location (needed for popup screen, Doug can edit) -->
     <label for="delivery-location">Delivery Location:</label>
-    <select id="delivery-location" name="delivery-location" @change="openPopup">
+    <select id="delivery-location" name="delivery-location" v-model="selectedLocation">
       <option value="">Select a location</option>
       <option value="Location 1">Location 1</option>
       <option value="Location 2">Location 2</option>
@@ -21,7 +21,7 @@
         <span class="close" @click="closePopup">&times;</span>
         <h2>Pickup Request</h2>
         <label for="item">Item Requested:</label>
-        <input type="text" id="item" name="item" required>
+        <input type="text" id="item" name="item" v-model="requestedItem" required>
 
         <br><br>
 
@@ -36,17 +36,21 @@ export default {
   data() {
     return {
       popupVisible: false,
+      selectedLocation: '',
+      requestedItem: ''
     };
   },
   methods: {
     openPopup() {
-      const deliveryLocation = document.getElementById('delivery-location');
-      if (deliveryLocation.value !== '') {
-        this.popupVisible = true;
-      }
+      this.popupVisible = this.selectedLocation !== '';
     },
     closePopup() {
       this.popupVisible = false;
+    },
+    submitRequest() {
+      // Perform form submission logic here
+      // For demonstration purposes, simply navigate to ProgressBar.vue after form submission
+      this.$router.push('/progressbar');
     },
   },
 };
