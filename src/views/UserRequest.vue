@@ -4,7 +4,7 @@
   </div>
 
   <form @submit.prevent="submitRequest">
-    <!-- Delivery location (needed for popup screen, Doug can edit) -->
+    <!-- Delivery location (needed for popup screen, Doug can edit later) -->
     <label for="delivery-location">Delivery Location:</label>
     <select id="delivery-location" name="delivery-location" v-model="selectedLocation">
       <option value="">Select a location</option>
