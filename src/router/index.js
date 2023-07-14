@@ -22,7 +22,7 @@ const routes = [
     component: UserRequest
   },
   {
-    path: 'progress',
+    path: '/progress',
     name: 'progressBar',
     component: SendingItems
   }
