@@ -1,8 +1,4 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-  </div>
-
   <form @submit.prevent="submitRequest">
     <!-- Delivery location (needed for popup screen, Doug can edit later) -->
     <label for="delivery-location">Delivery Location:</label>
