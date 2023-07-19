@@ -1,4 +1,18 @@
 <script>
+
+// eslint-disable-next-line no-unused-vars
+function changeWords(a,b,c,d) {
+  var elem = document.getElementById(a);
+  var txt = elem.innerHTML;
+
+  if((txt.includes("Pick") == false) && (txt.includes("Drop") == false)) {
+    elem.innerHTML = b;
+    document.getElementById(c).style.backgroundColor = '#FAEC9B';
+  } else if (d.includes("yes")) {
+    alert('Already picked a location, refresh the page to restart');
+  }
+}
+
 export default {
   data() {
     return {
