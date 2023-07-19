@@ -2,7 +2,7 @@
     <div class="home">
       <input type="text" id="textbox1" v-model="textbox1Value" />
       <input type="text" id="textbox2" />
-      <button id="reqCompBut" @click="reqCompButClick">Request Completed</button>
+      <button id="reqCompBut" @click="handleClick">Request Completed</button>
     </div>
   </template>
       
@@ -28,14 +28,14 @@
   
   
   <script setup>
-  //import { ref } from 'vue';
+  import { ref } from 'vue';
   
-  // const textboxValue = ref('');
+  const textboxValue = ref('');
   
-  // const handleClick = () => {
-  //   // Perform actions when the button is clicked
-  //   console.log('Button clicked!');
-  //   console.log('Textbox value:', textboxValue.value);
-  // }
+  const handleClick = () => {
+    // Perform actions when the button is clicked
+    console.log('Button clicked!');
+    console.log('Textbox value:', textboxValue.value);
+  }
   </script>
     
