@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import UserRequest from '../views/UserRequest.vue'
-// import SendingItems from '../views/SendingItems.vue'
-import ProgressBar from '../views/ProgressBar.vue'
+import SendingItems from '../views/SendingItems.vue'
 const routes = [
   {
     path: '/',
