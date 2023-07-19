@@ -33,6 +33,17 @@ export default {
       // For demonstration purposes, simply navigate to ProgressBar.vue after form submission
       this.$router.push('/progressbar');
     },
+    changeWords(a,b,c,d) {
+      var elem = document.getElementById(a);
+      var txt = elem.innerHTML;
+
+      if((txt.includes("Pick") == false) && (txt.includes("Drop") == false)) {
+        elem.innerHTML = b;
+        document.getElementById(c).style.backgroundColor = '#FAEC9B';
+      } else if (d.includes("yes")) {
+        alert('Already picked a location, refresh the page to restart');
+      }
+    },
   },
 }
 </script>
@@ -47,9 +58,9 @@ export default {
       <div class="container FromSelection">
         <!--<h2>Pickup Location</h2>-->
         <img src="RIC Conference Rooms Map.jpg" alt="Ric Conference Room Map" class="center" style="border:1px solid black">
-        <button id="CafeBtn" class="btn cafeBox" onmouseover="changeWords('FromSelection','From the Cafeteria', 'FromBoxDiv','no')" onmouseout="changeWords('FromSelection',' ', 'FromBoxDiv','no')" onclick="changeWords('FromSelection','Pick up at Cafeteria', 'FromBoxDiv','yes')">Cafe</button>
-        <button id="VVBtn" class="btn VVBox" onmouseover="changeWords('FromSelection','From V&V Lab', 'FromBoxDiv','no')" onmouseout="changeWords('FromSelection',' ', 'FromBoxDiv','no')" onclick="changeWords('FromSelection','Pick up at V&V Lab', 'FromBoxDiv', 'yes')">V&V</button>
-        <button id="DemoBtn" class="btn DemoBox" onmouseover="changeWords('FromSelection','From Demo Room', 'FromBoxDiv','no')" onmouseout="changeWords('FromSelection',' ', 'FromBoxDiv','no')" onclick="changeWords('FromSelection','Pick up at Demo Room', 'FromBoxDiv', 'yes')">Demo</button>
+        <button id="CafeBtn" class="btn cafeBox" @mouseover="changeWords('FromSelection','From the Cafeteria', 'FromBoxDiv','no')" @mouseout="changeWords('FromSelection',' ', 'FromBoxDiv','no')" @click="changeWords('FromSelection','Pick up at Cafeteria', 'FromBoxDiv','yes')">Cafe</button>
+        <button id="VVBtn" class="btn VVBox" @mouseover="changeWords('FromSelection','From V&V Lab', 'FromBoxDiv','no')" @mouseout="changeWords('FromSelection',' ', 'FromBoxDiv','no')" @click="changeWords('FromSelection','Pick up at V&V Lab', 'FromBoxDiv', 'yes')">V&V</button>
+        <button id="DemoBtn" class="btn DemoBox" @mouseover="changeWords('FromSelection','From Demo Room', 'FromBoxDiv','no')" @mouseout="changeWords('FromSelection',' ', 'FromBoxDiv','no')" @click="changeWords('FromSelection','Pick up at Demo Room', 'FromBoxDiv', 'yes')">Demo</button>
 
         <div id="FromBoxDiv" class="FromBox">
           <p id="FromSelection" class="SelectionChoice center"> </p>    
@@ -59,9 +70,9 @@ export default {
       <div class="container ToSelection">
         <!--<p>Dropoff Location</p>-->
         <img src="RIC Conference Rooms Map.jpg" alt="Ric Conference Room Map" class="center" style="border:1px solid black">
-        <button id="CafeBtn" class="btn cafeBox" onmouseover="changeWords('ToSelection','To the Cafeteria', 'ToBoxDiv', 'no')" onmouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no')" onclick="changeWords('ToSelection','Drop off at Cafeteria', 'ToBoxDiv', 'yes')">Cafe</button>
-        <button id="VVBtn" class="btn VVBox" onmouseover="changeWords('ToSelection','To V&V Lab', 'ToBoxDiv', 'no')" onmouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no')" onclick="changeWords('ToSelection','Drop off at V&V Lab', 'ToBoxDiv', 'yes')">V&V</button>
-        <button id="DemoBtn" class="btn DemoBox" onmouseover="changeWords('ToSelection','To Demo Room', 'ToBoxDiv', 'no')" onmouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no')" onclick="changeWords('ToSelection','Drop off at Demo Room', 'ToBoxDiv', 'yes')">Demo</button>
+        <button id="CafeBtn" class="btn cafeBox" @mouseover="changeWords('ToSelection','To the Cafeteria', 'ToBoxDiv', 'no')" @mouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no')" @click="changeWords('ToSelection','Drop off at Cafeteria', 'ToBoxDiv', 'yes')">Cafe</button>
+        <button id="VVBtn" class="btn VVBox" @mouseover="changeWords('ToSelection','To V&V Lab', 'ToBoxDiv', 'no')" @mouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no')" @click="changeWords('ToSelection','Drop off at V&V Lab', 'ToBoxDiv', 'yes')">V&V</button>
+        <button id="DemoBtn" class="btn DemoBox" @mouseover="changeWords('ToSelection','To Demo Room', 'ToBoxDiv', 'no')" @mouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no')" @click="changeWords('ToSelection','Drop off at Demo Room', 'ToBoxDiv', 'yes')">Demo</button>
 
         <div id="ToBoxDiv" class="ToBox">
           <p id="ToSelection" class="SelectionChoice center"> </p>    
