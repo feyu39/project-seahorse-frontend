@@ -1,6 +1,7 @@
 <script>
 
-/*function changeWords(a,b,c,d) {
+// eslint-disable-next-line no-unused-vars
+function changeWords(a,b,c,d) {
   var elem = document.getElementById(a);
   var txt = elem.innerHTML;
 
@@ -10,7 +11,7 @@
   } else if (d.includes("yes")) {
     alert('Already picked a location, refresh the page to restart');
   }
-}*/
+}
 
 export default {
   data() {
