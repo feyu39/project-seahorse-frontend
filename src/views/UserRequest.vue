@@ -4,14 +4,12 @@ export default {
   data() {
     return {
       popupVisible: false,
-      selectedLocation: '',
-      requestedItem: ''
+      requestedItem: '',
+      startLocation: '',
+      endLocation: ''
     };
   },
   methods: {
-    openPopup() {
-      this.popupVisible = this.selectedLocation !== '';
-    },
     closePopup() {
       this.popupVisible = false;
     },
@@ -20,35 +18,41 @@ export default {
       // For demonstration purposes, simply navigate to ProgressBar.vue after form submission
       this.$router.push('/progressbar');
     },
-    changeWords(a,b,c,d) {
+    changeWords(a,b,c,d, start) {
       var elem = document.getElementById(a);
       var txt = elem.innerHTML;
 
       if((txt.includes("Pick") == false) && (txt.includes("Drop") == false) && d.includes("yes")) {
         elem.innerHTML = b;
+        if(start) {
+          this.startLocation = b;
+        }
+        else {
+          this.endLocation = b
+        }
         document.getElementById(c).style.backgroundColor = '#FAEC9B';
         window.open("about:black","hello","width=200,height=200");
       } else if (d.includes("yes")) {
         alert('Already picked a location, refresh the page to restart');
       }
     },
-  },
+  }
 }
 </script>
 
 <template>
-  <form @submit.prevent="submitRequest">
+  <form @submit="submitRequest">
     <head>
       <h3 class="instructions">Select the pick-up and drop-off locations for the robot delivery</h3>
       <h2 class="PickupHeader">Pickup Location</h2>
     </head>
     <body>
       <div class="container FromSelection">
-        <!--<h2>Pickup Location</h2>-->
+        <!--<h2>Start/Pickup Location</h2>-->
         <img src="RIC Conference Rooms Map.jpg" alt="Ric Conference Room Map" class="center" style="border:1px solid black">
-        <button id="CafeBtn" class="btn cafeBox" @mouseover="changeWords('FromSelection','From the Cafeteria', 'FromBoxDiv','no')" @mouseout="changeWords('FromSelection',' ', 'FromBoxDiv','no')" @click="changeWords('FromSelection','Pick up at Cafeteria', 'FromBoxDiv','yes')">Cafe</button>
-        <button id="VVBtn" class="btn VVBox" @mouseover="changeWords('FromSelection','From V&V Lab', 'FromBoxDiv','no')" @mouseout="changeWords('FromSelection',' ', 'FromBoxDiv','no')" @click="changeWords('FromSelection','Pick up at V&V Lab', 'FromBoxDiv', 'yes')">V&V</button>
-        <button id="DemoBtn" class="btn DemoBox" @mouseover="changeWords('FromSelection','From Demo Room', 'FromBoxDiv','no')" @mouseout="changeWords('FromSelection',' ', 'FromBoxDiv','no')" @click="changeWords('FromSelection','Pick up at Demo Room', 'FromBoxDiv', 'yes')">Demo</button>
+        <button type= "button" id="CafeBtn" class="btn cafeBox" @mouseover="changeWords('FromSelection','From the Cafeteria', 'FromBoxDiv','no', true)" @mouseout="changeWords('FromSelection',' ', 'FromBoxDiv','no', true)" @click="changeWords('FromSelection','Pick up at Cafeteria', 'FromBoxDiv','yes', true)">Cafe</button>
+        <button type= "button" id="VVBtn" class="btn VVBox" @mouseover="changeWords('FromSelection','From V&V Lab', 'FromBoxDiv','no', true)" @mouseout="changeWords('FromSelection',' ', 'FromBoxDiv','no', true)" @click="changeWords('FromSelection','Pick up at V&V Lab', 'FromBoxDiv', 'yes', true)">V&V</button>
+        <button type= "button" id="DemoBtn" class="btn DemoBox" @mouseover="changeWords('FromSelection','From Demo Room', 'FromBoxDiv','no', true)" @mouseout="changeWords('FromSelection',' ', 'FromBoxDiv','no')" @click="changeWords('FromSelection','Pick up at Demo Room', 'FromBoxDiv', 'yes', true)">Demo</button>
 
         <div id="FromBoxDiv" class="FromBox">
           <p id="FromSelection" class="SelectionChoice center"> </p>    
@@ -56,11 +60,11 @@ export default {
       </div>
 
       <div class="container ToSelection">
-        <!--<p>Dropoff Location</p>-->
+        <!--<p>End/Dropoff Location</p>-->
         <img src="RIC Conference Rooms Map.jpg" alt="Ric Conference Room Map" class="center" style="border:1px solid black">
-        <button id="CafeBtn" class="btn cafeBox" @mouseover="changeWords('ToSelection','To the Cafeteria', 'ToBoxDiv', 'no')" @mouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no')" @click="changeWords('ToSelection','Drop off at Cafeteria', 'ToBoxDiv', 'yes')">Cafe</button>
-        <button id="VVBtn" class="btn VVBox" @mouseover="changeWords('ToSelection','To V&V Lab', 'ToBoxDiv', 'no')" @mouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no')" @click="changeWords('ToSelection','Drop off at V&V Lab', 'ToBoxDiv', 'yes')">V&V</button>
-        <button id="DemoBtn" class="btn DemoBox" @mouseover="changeWords('ToSelection','To Demo Room', 'ToBoxDiv', 'no')" @mouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no')" @click="changeWords('ToSelection','Drop off at Demo Room', 'ToBoxDiv', 'yes')">Demo</button>
+        <button type= "button" id="CafeBtn" class="btn cafeBox" @mouseover="changeWords('ToSelection','To the Cafeteria', 'ToBoxDiv', 'no', false)" @mouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no', false)" @click="changeWords('ToSelection','Drop off at Cafeteria', 'ToBoxDiv', 'yes', false)">Cafe</button>
+        <button type= "button" id="VVBtn" class="btn VVBox" @mouseover="changeWords('ToSelection','To V&V Lab', 'ToBoxDiv', 'no', false)" @mouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no', false)" @click="changeWords('ToSelection','Drop off at V&V Lab', 'ToBoxDiv', 'yes', false)">V&V</button>
+        <button type= "button" id="DemoBtn" class="btn DemoBox" @mouseover="changeWords('ToSelection','To Demo Room', 'ToBoxDiv', 'no', false)" @mouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no')" @click="changeWords('ToSelection','Drop off at Demo Room', 'ToBoxDiv', 'yes', )">Demo</button>
 
         <div id="ToBoxDiv" class="ToBox">
           <p id="ToSelection" class="SelectionChoice center"> </p>    
@@ -70,7 +74,7 @@ export default {
 
     <br><br>
 
-    <!-- Popup screen -->
+    <!-- Popup screen
     <div id="popup" class="popup" v-show="popupVisible">
       <div class="popup-content">
         <span class="close" @click="closePopup">&times;</span>
@@ -82,7 +86,8 @@ export default {
 
         <input type="submit" value="Submit Request">
       </div>
-    </div>
+    </div> -->
+    <input type="submit" value="Submit Request">
   </form>
 </template>
 
