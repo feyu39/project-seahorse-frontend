@@ -1,4 +1,6 @@
 <script>
+import axios from 'axios';
+
 
 // eslint-disable-next-line no-unused-vars
 function changeWords(a,b,c,d) {
@@ -19,7 +21,8 @@ export default {
       popupVisible: false,
       requestedItem: '',
       startLocation: '',
-      endLocation: ''
+      endLocation: '',
+      requestData: {}
     };
   },
   methods: {
@@ -29,6 +32,14 @@ export default {
     submitRequest() {
       // Perform form submission logic here
       // For demonstration purposes, simply navigate to ProgressBar.vue after form submission
+      this.requestData = {start_location: this.startLocation, end_location: this.endLocation, item: this.requestedItem};
+      axios.post('http://127.0.0.1:5000/request', this.requestData)
+        .then(response => {
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.log(error);
+        });
       this.$router.push('/progressbar');
     },
     changeWords(a,b,c,d, start) {

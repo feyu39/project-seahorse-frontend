@@ -29,11 +29,18 @@
   
   <script setup>
   import { ref } from 'vue';
-  
+  import axios from 'axios'
   const textboxValue = ref('');
   
   const handleClick = () => {
     // Perform actions when the button is clicked
+      axios.post('http://127.0.0.1:5000/send')
+        .then(response => {
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.log(error);
+        });
     console.log('Button clicked!');
     console.log('Textbox value:', textboxValue.value);
   }
