@@ -31,7 +31,7 @@ export default {
           this.endLocation = b
         }
         document.getElementById(c).style.backgroundColor = '#FAEC9B';
-        window.open("about:black","hello","width=200,height=200");
+        window.open("about:","hello","width=200,height=200");
       } else if (d.includes("yes")) {
         alert('Already picked a location, refresh the page to restart');
       }
