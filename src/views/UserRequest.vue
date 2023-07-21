@@ -1,18 +1,5 @@
 <script>
 
-// eslint-disable-next-line no-unused-vars
-function changeWords(a,b,c,d) {
-  var elem = document.getElementById(a);
-  var txt = elem.innerHTML;
-
-  if((txt.includes("Pick") == false) && (txt.includes("Drop") == false)) {
-    elem.innerHTML = b;
-    document.getElementById(c).style.backgroundColor = '#FAEC9B';
-  } else if (d.includes("yes")) {
-    alert('Already picked a location, refresh the page to restart');
-  }
-}
-
 export default {
   data() {
     return {
@@ -37,9 +24,10 @@ export default {
       var elem = document.getElementById(a);
       var txt = elem.innerHTML;
 
-      if((txt.includes("Pick") == false) && (txt.includes("Drop") == false)) {
+      if((txt.includes("Pick") == false) && (txt.includes("Drop") == false) && d.includes("yes")) {
         elem.innerHTML = b;
         document.getElementById(c).style.backgroundColor = '#FAEC9B';
+        window.open("about:black","hello","width=200,height=200");
       } else if (d.includes("yes")) {
         alert('Already picked a location, refresh the page to restart');
       }
@@ -208,24 +196,28 @@ export default {
 
   .container .cafeBox {
     position: absolute;
-    top: 12.25vw;
-    left: 80%;
-    width:9%;
-    height:6.25vw;
+    top: 11.9vw;
+    left: 35.5vw;
+    width:4.25vw;
+    height:6vw;
   }
 
   .container .VVBox {
     position: absolute;
-    top: 13.75vw;
-    left: 11.75vw;
+    top: 13.5vw;
+    left: 12.25vw;
     width:5.5vw;
-    height: 2vw;
+    height: 2.25vw;
+    padding:0px;
   }
 
   .container .DemoBox {
     position: absolute;
-    top: 10.75vw;
+    top: 10.4vw;
     left: 25.5vw;
+    width: 3.5vw;
+    height: 2vw;
+    padding:0px;
   }
 
   .container .btn:hover {
