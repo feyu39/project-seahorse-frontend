@@ -31,12 +31,13 @@
   <script setup>
   import { ref } from 'vue';
   import axios from 'axios'
-  axios.defaults.withCredentials = true;
   const textboxValue = ref('');
   
   const handleClick = () => {
     // Perform actions when the button is clicked
-      axios.post('http://127.0.0.1:5000/send')
+      axios.post('http://127.0.0.1:5000/send', {}, {withCredentials: true, 
+        headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}
+        })
         .then(response => {
           console.log(response.data)
         })
