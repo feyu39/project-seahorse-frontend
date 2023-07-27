@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 
 // eslint-disable-next-line no-unused-vars
@@ -33,14 +34,14 @@ export default {
       // Perform form submission logic here
       // For demonstration purposes, simply navigate to ProgressBar.vue after form submission
       this.requestData = {start_location: this.startLocation, end_location: this.endLocation, item: this.requestedItem};
-      axios.post('http://127.0.0.1:5000/request', this.requestData)
+      axios.post('http://127.0.0.1:5000/request', this.requestData, {withCredentials: true})
         .then(response => {
           console.log(response.data)
         })
         .catch(error => {
           console.log(error);
         });
-      this.$router.push('/progressbar');
+      this.$router.push('/progress');
     },
     changeWords(a,b,c,d, start) {
       var elem = document.getElementById(a);
