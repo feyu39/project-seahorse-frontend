@@ -1,4 +1,5 @@
 <script>
+import axios from 'axios';
 
 export default {
   data() {
@@ -6,7 +7,8 @@ export default {
       popupVisible: false,
       requestedItem: '',
       startLocation: '',
-      endLocation: ''
+      endLocation: '',
+      requestData: {}
     };
   },
   methods: {
@@ -16,7 +18,18 @@ export default {
     submitRequest() {
       // Perform form submission logic here
       // For demonstration purposes, simply navigate to ProgressBar.vue after form submission
-      this.$router.push('/progressbar');
+      this.requestData = {start_location: this.startLocation, end_location: this.endLocation, item: this.requestedItem};
+      axios.post('http://127.0.0.1:5000/request', this.requestData, {
+         withCredentials: true,
+         headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}
+      })
+        .then(response => {
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      this.$router.push('/progress');
     },
 
     changeWords(a,b,c,d, start) {
@@ -54,9 +67,9 @@ export default {
       <div class="container FromSelection">
         <!--<h2>Start/Pickup Location</h2>-->
         <img src="RIC Conference Rooms Map.jpg" alt="Ric Conference Room Map" class="center" style="border:1px solid black">
-        <button type= "button" id="CafeBtn" class="btn cafeBox" @mouseover="changeWords('FromSelection','From the Cafeteria', 'FromBoxDiv','no', true)" @mouseout="changeWords('FromSelection',' ', 'FromBoxDiv','no', true)" @click="changeWords('FromSelection','Pick up at Cafeteria', 'FromBoxDiv','yes', true)">Cafe</button>
-        <button type= "button" id="VVBtn" class="btn VVBox" @mouseover="changeWords('FromSelection','From V&V Lab', 'FromBoxDiv','no', true)" @mouseout="changeWords('FromSelection',' ', 'FromBoxDiv','no', true)" @click="changeWords('FromSelection','Pick up at V&V Lab', 'FromBoxDiv', 'yes', true)">V&V</button>
-        <button type= "button" id="DemoBtn" class="btn DemoBox" @mouseover="changeWords('FromSelection','From Demo Room', 'FromBoxDiv','no', true)" @mouseout="changeWords('FromSelection',' ', 'FromBoxDiv','no')" @click="changeWords('FromSelection','Pick up at Demo Room', 'FromBoxDiv', 'yes', true)">Demo</button>
+        <button type="button" id="CafeBtn" class="btn cafeBox" @mouseover="changeWords('FromSelection','From the Cafeteria', 'FromBoxDiv','no', true)" @mouseout="changeWords('FromSelection',' ', 'FromBoxDiv','no', true)" @click="changeWords('FromSelection','Pick up at Cafeteria', 'FromBoxDiv','yes', true)">Cafe</button>
+        <button type="button" id="VVBtn" class="btn VVBox" @mouseover="changeWords('FromSelection','From V&V Lab', 'FromBoxDiv','no', true)" @mouseout="changeWords('FromSelection',' ', 'FromBoxDiv','no', true)" @click="changeWords('FromSelection','Pick up at V&V Lab', 'FromBoxDiv', 'yes', true)">V&V</button>
+        <button type="button" id="DemoBtn" class="btn DemoBox" @mouseover="changeWords('FromSelection','From Demo Room', 'FromBoxDiv','no', true)" @mouseout="changeWords('FromSelection',' ', 'FromBoxDiv','no')" @click="changeWords('FromSelection','Pick up at Demo Room', 'FromBoxDiv', 'yes', true)">Demo</button>
 
         <div id="FromBoxDiv" class="FromBox">
           <p id="FromSelection" class="SelectionChoice center"> </p>    
@@ -66,9 +79,9 @@ export default {
       <div class="container ToSelection">
         <!--<p>End/Dropoff Location</p>-->
         <img src="RIC Conference Rooms Map.jpg" alt="Ric Conference Room Map" class="center" style="border:1px solid black">
-        <button type= "button" id="CafeBtn" class="btn cafeBox" @mouseover="changeWords('ToSelection','To the Cafeteria', 'ToBoxDiv', 'no', false)" @mouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no', false)" @click="changeWords('ToSelection','Drop off at Cafeteria', 'ToBoxDiv', 'yes', false)">Cafe</button>
-        <button type= "button" id="VVBtn" class="btn VVBox" @mouseover="changeWords('ToSelection','To V&V Lab', 'ToBoxDiv', 'no', false)" @mouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no', false)" @click="changeWords('ToSelection','Drop off at V&V Lab', 'ToBoxDiv', 'yes', false)">V&V</button>
-        <button type= "button" id="DemoBtn" class="btn DemoBox" @mouseover="changeWords('ToSelection','To Demo Room', 'ToBoxDiv', 'no', false)" @mouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no')" @click="changeWords('ToSelection','Drop off at Demo Room', 'ToBoxDiv', 'yes', )">Demo</button>
+        <button type="button" id="CafeBtn" class="btn cafeBox" @mouseover="changeWords('ToSelection','To the Cafeteria', 'ToBoxDiv', 'no', false)" @mouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no', false)" @click="changeWords('ToSelection','Drop off at Cafeteria', 'ToBoxDiv', 'yes', false)">Cafe</button>
+        <button type="button" id="VVBtn" class="btn VVBox" @mouseover="changeWords('ToSelection','To V&V Lab', 'ToBoxDiv', 'no', false)" @mouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no', false)" @click="changeWords('ToSelection','Drop off at V&V Lab', 'ToBoxDiv', 'yes', false)">V&V</button>
+        <button type="button" id="DemoBtn" class="btn DemoBox" @mouseover="changeWords('ToSelection','To Demo Room', 'ToBoxDiv', 'no', false)" @mouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no')" @click="changeWords('ToSelection','Drop off at Demo Room', 'ToBoxDiv', 'yes', )">Demo</button>
 
         <div id="ToBoxDiv" class="ToBox">
           <p id="ToSelection" class="SelectionChoice center"> </p>    
@@ -77,20 +90,6 @@ export default {
     </body>
 
     <br><br>
-
-    <!-- Popup screen
-    <div id="popup" class="popup" v-show="popupVisible">
-      <div class="popup-content">
-        <span class="close" @click="closePopup">&times;</span>
-        <h2>Pickup Request</h2>
-        <label for="item">Item Requested:</label>
-        <input type="text" id="item" name="item" v-model="requestedItem" required>
-
-        <br><br>
-
-        <input type="submit" value="Submit Request">
-      </div>
-    </div> -->
     <input type="submit" value="Submit Request">
   </form>
 </template>
