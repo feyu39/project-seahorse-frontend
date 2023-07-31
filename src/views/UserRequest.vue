@@ -1,10 +1,10 @@
 <template>
   <form @submit="submitRequest">
-    <head>
-      <h3 class="instructions">Select the pick-up and drop-off locations for the robot delivery</h3>
-      <h2 class="PickupHeader">Pickup Location</h2>
-    </head>
     <body>
+      <div class="heading">
+          <p>Select the pick-up and drop-off locations for the robot delivery</p>
+      </div>
+
       <div class="container FromSelection">
         <!--<h2>Start/Pickup Location</h2>-->
         <img src="RIC Conference Rooms Map.jpg" alt="Ric Conference Room Map" class="center" style="border:1px solid black">
@@ -67,6 +67,12 @@
   cursor: pointer;
 }
 
+.heading {
+  font-size:1vw;
+  display:block;
+  margin:0;
+}
+
 .center {
     display: block;
     margin-left: auto;
@@ -75,17 +81,9 @@
     height: 70%;
   }
 
-  .instructions {
-    margin-left: 37%;
-  }
-
-  .PickupHeader {
-    margin-left: 2vw;
-  }
-
   .FromSelection {
     margin-left:2%;
-    margin-top: 0;
+    margin-top: 1.85vw;
     float: left;
   }
 
@@ -104,7 +102,7 @@
   }
 
   .FromBox .SelectionChoice {
-    font-size: 1.2vw;
+    font-size: 1.19vw;
     text-align: center;
   }
 
@@ -145,7 +143,7 @@
   .container .cafeBox {
     position: absolute;
     top: 11.9vw;
-    left: 35.5vw;
+    left: 35vw;
     width:4.25vw;
     height:6vw;
   }
@@ -153,7 +151,7 @@
   .container .VVBox {
     position: absolute;
     top: 13.5vw;
-    left: 12.25vw;
+    left: 11.5vw;
     width:5.5vw;
     height: 2.25vw;
     padding:0px;
@@ -162,7 +160,7 @@
   .container .DemoBox {
     position: absolute;
     top: 10.4vw;
-    left: 25.5vw;
+    left: 25vw;
     width: 3.5vw;
     height: 2vw;
     padding:0px;
@@ -226,7 +224,7 @@ export default {
         }
         if(txt.includes("Pick") == true || txt.includes("Drop") == true) {
           document.getElementById(c).style.backgroundColor = '#FAEC9B';
-          window.open("about:","hello","width=200,height=200");
+          //window.open("about:","hello","width=200,height=200");
         }
       } else if (d.includes("yes")) {
         alert('Already picked a location, refresh the page to restart');
