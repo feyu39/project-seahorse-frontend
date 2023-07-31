@@ -18,20 +18,24 @@ export default {
       // For demonstration purposes, simply navigate to ProgressBar.vue after form submission
       this.$router.push('/progressbar');
     },
+
     changeWords(a,b,c,d, start) {
       var elem = document.getElementById(a);
       var txt = elem.innerHTML;
 
-      if((txt.includes("Pick") == false) && (txt.includes("Drop") == false) && d.includes("yes")) {
+      if((txt.includes("Pick") == false) && (txt.includes("Drop") == false)) {
         elem.innerHTML = b;
+        txt = b;
         if(start) {
           this.startLocation = b;
         }
-        else {
+        if(start == false) {
           this.endLocation = b
         }
-        document.getElementById(c).style.backgroundColor = '#FAEC9B';
-        window.open("about:","hello","width=200,height=200");
+        if(txt.includes("Pick") == true || txt.includes("Drop") == true) {
+          document.getElementById(c).style.backgroundColor = '#FAEC9B';
+          window.open("about:","hello","width=200,height=200");
+        }
       } else if (d.includes("yes")) {
         alert('Already picked a location, refresh the page to restart');
       }
