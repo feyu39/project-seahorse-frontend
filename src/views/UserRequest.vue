@@ -1,58 +1,3 @@
-<script>
-import axios from 'axios';
-
-export default {
-  data() {
-    return {
-      popupVisible: false,
-      requestedItem: '',
-      startLocation: '',
-      endLocation: '',
-      requestData: {}
-    };
-  },
-  methods: {
-    closePopup() {
-      this.popupVisible = false;
-    },
-    submitRequest() {
-      // Perform form submission logic here
-      // For demonstration purposes, simply navigate to ProgressBar.vue after form submission
-      this.requestData = {start_location: this.startLocation, end_location: this.endLocation, item: this.requestedItem};
-      axios.post('http://127.0.0.1:5000/request', this.requestData, {
-         withCredentials: true,
-         headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}
-      })
-        .then(response => {
-          console.log(response.data)
-        })
-        .catch(error => {
-          console.log(error);
-        });
-      this.$router.push('/progress');
-    },
-    changeWords(a,b,c,d, start) {
-      var elem = document.getElementById(a);
-      var txt = elem.innerHTML;
-
-      if((txt.includes("Pick") == false) && (txt.includes("Drop") == false) && d.includes("yes")) {
-        elem.innerHTML = b;
-        if(start) {
-          this.startLocation = b;
-        }
-        else {
-          this.endLocation = b
-        }
-        document.getElementById(c).style.backgroundColor = '#FAEC9B';
-        // window.open("about:","hello","width=200,height=200");
-      } else if (d.includes("yes")) {
-        alert('Already picked a location, refresh the page to restart');
-      }
-    },
-  }
-}
-</script>
-
 <template>
   <form @submit="submitRequest">
     <head>
@@ -86,11 +31,10 @@ export default {
     </body>
 
     <br><br>
+    <input type="text" id="Item" name="Item" placeholder="Enter Item to Request">
     <input type="submit" value="Submit Request">
   </form>
 </template>
-
-
 
 <style scoped>
 /* Styles for the popup */
@@ -232,3 +176,59 @@ export default {
   }
 
 </style>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      popupVisible: false,
+      requestedItem: '',
+      startLocation: '',
+      endLocation: '',
+      requestData: {}
+    };
+  },
+  methods: {
+    closePopup() {
+      this.popupVisible = false;
+    },
+    submitRequest() {
+      // Perform form submission logic here
+      // For demonstration purposes, simply navigate to ProgressBar.vue after form submission
+      this.requestedItem = document.getElementById('Item').value
+      this.requestData = {start_location: this.startLocation, end_location: this.endLocation, item: this.requestedItem};
+      axios.post('http://127.0.0.1:5000/request', this.requestData, {
+         withCredentials: true,
+         headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}
+      })
+        .then(response => {
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      this.$router.push('/progress');
+    },
+    changeWords(a,b,c,d, start) {
+      var elem = document.getElementById(a);
+      var txt = elem.innerHTML;
+
+      if((txt.includes("Pick") == false) && (txt.includes("Drop") == false) && d.includes("yes")) {
+        elem.innerHTML = b;
+        if(start) {
+          this.startLocation = b;
+        }
+        else {
+          this.endLocation = b
+        }
+        document.getElementById(c).style.backgroundColor = '#FAEC9B';
+        // window.open("about:","hello","width=200,height=200");
+      } else if (d.includes("yes")) {
+        alert('Already picked a location, refresh the page to restart');
+      }
+    },
+  }
+}
+</script>
