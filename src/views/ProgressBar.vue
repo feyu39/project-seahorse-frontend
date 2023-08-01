@@ -34,8 +34,8 @@
 },
 created() {
   this.fetchData();
-  // Call the fetchData method every 5 seconds (adjust the interval as needed)
-  setInterval(this.fetchData, 5000);
+  // Call the fetchData method every 10 seconds (adjust the interval as needed)
+  setInterval(this.fetchData, 10000);
 },
   };
   </script>
