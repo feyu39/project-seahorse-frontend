@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-      <h3 id="item-to-send">Item to send: {{itemToSend}}</h3>
+      <h4 id="item-to-send">Item to send: {{itemToSend}}</h4>
       <button id="myButton" @click="handleClick">Request Completed</button>
     </div>
   </template>
