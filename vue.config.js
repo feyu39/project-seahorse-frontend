@@ -11,6 +11,7 @@ module.exports = defineConfig({
 				additionalData: [...bootstrapSassAbstractsImports, ''].join(';\n')
 			}
 		}
-	}
+	},
+	publicPath: '/project-seahorse-frontend'
 });
 
