@@ -16,15 +16,19 @@
   export default {
     data() {
       return {
-        progressWidth: '50%',
+        progressWidth: '0%',
       };
     },
     methods: {
   async fetchData() {
     axios.get('http://127.0.0.1:5000/location')
       .then(response => {
-        if (response.data['location'] === 1) {
-          this.progressWidth = '100%';
+        if (response.data['location'] === 4) {
+          this.progressWidth = '50%';
+        }
+        else if(response.data['location'] === 5) {
+          this.progressWidth = '100%'
+          setTimeout(3000, this.$router.push('/request'))
         }
       })
       .catch(error => {
