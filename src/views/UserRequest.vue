@@ -21,7 +21,7 @@
         <!--<p>End/Dropoff Location</p>-->
         <img src="RIC Conference Rooms Map.jpg" alt="Ric Conference Room Map" class="center" style="border:1px solid black">
         <button type="button" id="CafeBtn" class="btn cafeBox" @mouseover="changeWords('ToSelection','To the Cafeteria', 'ToBoxDiv', 'no', false)" @mouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no', false)" @click="changeWords('ToSelection','Drop off at Cafeteria', 'ToBoxDiv', 'yes', false)">Cafe</button>
-        <button type="button" id="VVBtn" class="btn VVBox" @mouseover="changeWords('ToSelection','To V&V Lab', 'ToBoxDiv', 'no', false)" @mouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no', false)" @click="changeWords('ToSelection','Drop off at V&V Lab', 'ToBoxDiv', 'yes', false)">V&V</button>
+        <button type="button" id="VVBtn" class="btn VVBox" @mouseover="changeWords('ToSelection','To the V&V Lab', 'ToBoxDiv', 'no', false)" @mouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no', false)" @click="changeWords('ToSelection','Drop off at V&V Lab', 'ToBoxDiv', 'yes', false)">V&V</button>
         <button type="button" id="DemoBtn" class="btn DemoBox" @mouseover="changeWords('ToSelection','To Demo Room', 'ToBoxDiv', 'no', false)" @mouseout="changeWords('ToSelection',' ', 'ToBoxDiv', 'no', false)" @click="changeWords('ToSelection','Drop off at Demo Room', 'ToBoxDiv', 'yes', false )">Demo</button>
 
         <div id="ToBoxDiv" class="ToBox">
@@ -94,7 +94,7 @@
 
   .FromBox {
     border: 2px solid black;
-    width:9vw;
+    width:10vw;
     height:5vw;
     margin: auto;
     margin-top: 2vw;
@@ -108,7 +108,7 @@
 
   .ToBox {
     border: 2px solid black;
-    width:9vw;
+    width:10vw;
     height:5vw;
     margin: auto;
     margin-top: 2vw;
