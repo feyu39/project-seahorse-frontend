@@ -23,8 +23,12 @@
   async fetchData() {
     axios.get('http://127.0.0.1:5000/location')
       .then(response => {
-        if (response.data['location'] === 1) {
-          this.progressWidth = '100%';
+        if (response.data['location'] === 4) {
+          this.progressWidth = '50%';
+        }
+        else if(response.data['location'] === 5) {
+          this.progressWidth = '100%'
+          setTimeout(3000, this.$router.push('/request'))
         }
       })
       .catch(error => {
@@ -35,7 +39,7 @@
 created() {
   this.fetchData();
   // Call the fetchData method every 5 seconds (adjust the interval as needed)
-  setInterval(this.fetchData, 5000);
+  setInterval(this.fetchData, 10000);
 },
   };
   </script>
