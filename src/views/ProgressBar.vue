@@ -1,9 +1,11 @@
 <template>
+    <h2 class="text-center">Robot Delivery Status</h2>
     <div style="position: relative;">
       <div class="progress" style="height: 20px;">
         <div class="progress-bar" :style="{ width: progressWidth }"></div>
       </div>
       <div class="text-center mt-2">
+        <span style="position: absolute; left: 25%;">^ Robot requested</span>
         <span style="position: absolute; left: 50%;">^ Robot arrived at location 1</span>
         <span style="position: absolute; right: 0;">Robot arrived at location 2 ^</span>
       </div>
@@ -16,7 +18,7 @@
   export default {
     data() {
       return {
-        progressWidth: '0%',
+        progressWidth: '25%',
       };
     },
     methods: {
